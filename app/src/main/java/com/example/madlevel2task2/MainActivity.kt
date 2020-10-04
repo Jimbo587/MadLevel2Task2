@@ -29,17 +29,28 @@ class MainActivity : AppCompatActivity() {
             LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
         binding.rvQuestions.adapter = questionAdapter
         for (i in Question.QUESTIONS.indices) {
-            questions.add(Question(Question.QUESTIONS[i].questionText, Question.QUESTIONS[i].answer))
+            questions.add(
+                Question(
+                    Question.QUESTIONS[i].questionText,
+                    Question.QUESTIONS[i].answer
+                )
+            )
         }
 
-        binding.rvQuestions.addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
+        binding.rvQuestions.addItemDecoration(
+            DividerItemDecoration(
+                this@MainActivity,
+                DividerItemDecoration.VERTICAL
+            )
+        )
         createItemTouchHelper().attachToRecyclerView(rv_questions)
         questionAdapter.notifyDataSetChanged()
     }
 
     private fun createItemTouchHelper(): ItemTouchHelper {
 
-        val callback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+        val callback = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
 
             // Enables or Disables the ability to move items up and down.
             override fun onMove(
@@ -59,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     Snackbar.make(
                         binding.rvQuestions[position],
-                        "Incorrect answer, try again!",
+                        "Answer is incorrect! Please, try again.",
                         Snackbar.LENGTH_SHORT
                     ).show()
                 }
